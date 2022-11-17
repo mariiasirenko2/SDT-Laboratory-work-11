@@ -1,11 +1,12 @@
 package com.nuop.sdt;
+import java.util.Date;
 
 public class Reminder {
 
-  private Long id,
-  private String name;
-  private String days,
-  private Date time;
+  public Long id,
+  public String name;
+  public String days,
+  public Date time;
   
   public void setDayToReminder(String days){
     if(new String("ПН ВТ СР ЧТ ПТ СБ ВС").contains(days){
