@@ -1,5 +1,8 @@
 /**
  * Info about this package doing something for package-info.java file.
+ * @since 1.0
+ * @author sirenko
+ * @version 1.1
  */
 package com.nuop.sdt;
 
@@ -46,6 +49,7 @@ public class Reminder {
   
   /**
    * Main class.
+   *
    * @param args String array args argument
    */
   public static void main(final String[] args) {
