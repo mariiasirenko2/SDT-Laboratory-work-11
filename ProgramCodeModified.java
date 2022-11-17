@@ -31,15 +31,14 @@ public class Reminder {
   /**
    * Method to perform set reminder day.
    *
-   * @param days string of days
-   * @return true if days  is correct, else false
+   * @param day string of days
+   * @return true if day is correct, else false
    */
-  public boolean setDayToReminder(String day) {
-    if(new String("ПН ВТ СР ЧТ ПТ СБ ВС").contains(day)) {
+  public boolean setDayToReminder(final String day) {
+    if (new String("ПН ВТ СР ЧТ ПТ СБ ВС").contains(day)) {
       this.days = day;
       return true;
-    }
-    else {
+    } else {
       System.out.println("Allowed days: ПН ВТ СР ЧТ ПТ СБ ВС ");
       return false;
     }
