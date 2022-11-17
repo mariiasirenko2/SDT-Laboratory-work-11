@@ -1,8 +1,5 @@
 /**
- * Info about this package doing something for package-info.java file.
- * @since 1.0
- * @author sirenko
- * @version 1.1
+ * Some info about package.
  */
 package com.nuop.sdt;
 
@@ -46,7 +43,7 @@ public class Reminder {
       return false;
     }
   }
-  
+
   /**
    * Main class.
    *
