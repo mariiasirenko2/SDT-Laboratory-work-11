@@ -7,7 +7,6 @@ public class Reminder {
   private String days,
   private Date time;
   
-  
   public void setDayToReminder(String days){
     if(new String("ПН ВТ СР ЧТ ПТ СБ ВС").contains(days){
         this.day = days;
