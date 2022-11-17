@@ -11,7 +11,7 @@ public class Reminder {
     if(new String("ПН ВТ СР ЧТ ПТ СБ ВС").contains(days){
         this.day = days;
     }
-    else throws IllegalArgumentException("Allowed days: ПН ВТ СР ЧТ ПТ СБ ВС ");
+    else System.out.println("Allowed days: ПН ВТ СР ЧТ ПТ СБ ВС ");
   
   }
 
