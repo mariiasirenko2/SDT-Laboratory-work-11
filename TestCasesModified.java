@@ -37,7 +37,7 @@ public class ReminderTest {
       int actualTestResultForFirstTest = testReminder(goodReminder);
       System.out.println("TC1: object " + goodReminder + "  should pass check.      Expected result =  0, actual result =  " + actualTestResultForFirstTest + " || " + ((0 == actualTestResultForFirstTest)?("PASSED"):("FAILED")));
 
-      Reminder reminderWithBadName = new Reminder("12nnkkd", "ПНL");
+      Reminder reminderWithBadName = new Reminder("Lunch", "ПНL");
       int actualTestResultForSecondTest = testReminder(reminderWithBadName);
       System.out.println("TC2: object " + reminderWithBadName + " should not pass check.  Expected result = -1, actual result = " + actualTestResultForSecondTest + " || " + ((-1 == actualTestResultForSecondTest)?("PASSED"):("FAILED")));
 
