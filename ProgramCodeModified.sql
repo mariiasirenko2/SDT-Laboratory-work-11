@@ -11,8 +11,6 @@ CREATE OR REPLACE TABLE Users(
 CREATE TABLE Users_List IS TABLE OF users;
 /
 
-/* Створення типу для зберігання списку колекцій - "Колекція екземплярів об`єктів класу Collection */
-CREATE TABLE Collection_List IS TABLE OF Collection;
 
 /* Створення об'єктного типу (класу) Project */
 CREATE OR REPLACE TABLE Project (
@@ -20,7 +18,7 @@ CREATE OR REPLACE TABLE Project (
 	name VARCHAR(100),--назва проекту
 	details VARCHAR(100), --опис проекту
         keywords VARCHAR(100)--ключові слова проект
-        collections Collection_List)
+      )
 	
 
     	CONSTRUCTOR FUNCTION Project(p_pname VARCHAR)
