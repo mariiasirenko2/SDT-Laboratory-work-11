@@ -34,7 +34,7 @@ class TestCases {
             + "res :=-1;\n"
             + "end if;\n"
             + "return res;\n"
-            + "end;");
+            + "end");
 
         }catch(Exception e){
           System.out.println(e);
