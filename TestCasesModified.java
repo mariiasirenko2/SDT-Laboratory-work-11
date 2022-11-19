@@ -4,7 +4,7 @@ import oracle.jdbc.driver.*;
 class TestCasesModified {
 
      public static void main(final String[] args) {
-        int testcaseResult = 0;
+        int testcaseResult = -1;
         try{
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         Connection con = DriverManager.getConnection(
@@ -18,5 +18,6 @@ class TestCasesModified {
         }catch(Exception e){
           System.out.println(e);
         }
+          System.exit(testcaseResult);
       }
 }
