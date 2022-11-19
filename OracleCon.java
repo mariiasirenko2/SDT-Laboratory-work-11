@@ -2,7 +2,7 @@ package com.nuop.sdt;
 
 import oracle.jdbc.driver.*;
 
-class OracleCom {
+class OracleCon {
     public static void main (final String[] args){
       try{
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
