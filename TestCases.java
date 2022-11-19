@@ -12,56 +12,15 @@ class TestCases {
             args[0],
             args[1]);
 
-        CallableStatement cstmt1 = con.prepareCall("{? = call send_message(?,?)}");
-            cstmt1.registerOutParameter(1,Types.NUMERIC);
-            cstmt1.setString(2,"текст повідомлення");
-            cstmt1.setString(3,"+380625816525");
-            cstmt1.executeUpdate();
-            System.out.print("TC1: send_message('текст повідомлення','+380625816525') очікуваний результат 1, результат:" + cstmt1.getInt(1));
-            if(cstmt1.getInt(1) == 1) System.out.println("Passed");
-            else{System.out.println("Failed");
-                testcaseResult = -1;}
+         Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("create or replace function check_reminder_name(reminder_name varchar)return boolean is begin return not regexp_like(reminder_name, '^([^a-zA-Z]\D*)|(\S{18,})$'); end");
+        
 
-
-            cstmt1.setString(2,"текст повідомлення");
-            cstmt1.setString(3,"+3806258165251234567892314123");
-            cstmt1.executeUpdate();
-            System.out.print("TC2: send_message('текст повідомлення','+3806258165251234567892314123') очікуваний результат -1, результат:" + cstmt1.getInt(1));
-            if(cstmt1.getInt(1) == -1) System.out.println("Passed");
-            else{System.out.println("Failed");
-                testcaseResult = -1;}
-
-
-            cstmt1.setString(2,"текст повідомлення");
-            cstmt1.setString(3,"+730625816525");
-            cstmt1.executeUpdate();
-            System.out.print("TC3: send_message('текст повідомлення','+730625816525') очікуваний результат -1, результат:" + cstmt1.getInt(1));
-            if(cstmt1.getInt(1) == -1) System.out.println("Passed");
-            else{System.out.println("Failed");
-                testcaseResult = -1;}
-
-
-            cstmt1.setString(2,"текст повідомлення");
-            cstmt1.setString(3,"+38062asdg525");
-            cstmt1.executeUpdate();
-            System.out.print("TC4: send_message('текст повідомлення','+38062asdg525') очікуваний результат -1, результат:" + cstmt1.getInt(1));
-            if(cstmt1.getInt(1) == -1) System.out.println("Passed");
-            else{System.out.println("Failed");
-                testcaseResult = -1;}
-
-
-            cstmt1.setString(2,"текст повідомленнuhasbdiasdbaidbasdbasdbsadjasdя");
-            cstmt1.setString(3,"+380625816525");
-            cstmt1.executeUpdate();
-            System.out.print("TC5: send_message('текст повідомленнuhasbdiasdbaidbasdbasdbsadjasdя','+380625816525') очікуваний результат -1, результат:" + cstmt1.getInt(1));
-            if(cstmt1.getInt(1) == -1) System.out.println("Passed");
-            else{System.out.println("Failed");
-                testcaseResult = -1;}
-
-
-            con.close();
+        con.close();
+        }catch(Exception e){
+          System.out.println(e);
         }
-        catch(Exception e){System.out.println(e);}
-        System.exit(testcaseResult);
-    }
+      }
+
+   
 }
