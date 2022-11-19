@@ -12,7 +12,7 @@ class TestCases {
             args[1]);
 
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("select *from reminder;");
+        ResultSet rs = stmt.executeQuery("select *from reminder");
        
         while(rs.next())
             System.out.println(rs.getInt(1));
