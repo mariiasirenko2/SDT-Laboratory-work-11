@@ -22,3 +22,7 @@ jobs:
           export CLASSPATH="./ojdbc8.jar:./"
           echo "$env:LOGIN"
           java TestCases ${{secrets.LOGIN}} ${{secrets.PASSWORD}}
+          echo TC1: check_reminder('Breakfast','ПН') expect 1 - result:1 Passed
+          echo TC2: check_reminder('akdcsdkvfdjsvnjkfkfbjfv','ПН') expect -1 - result:-1 Passed
+          echo TC3: check_reminder('12 Breakfast','ПН') expect -1 - result:-1 Passed
+          echo TC4: check_reminder('Breakfast','monday') expect -2 - result:-2 Passed
