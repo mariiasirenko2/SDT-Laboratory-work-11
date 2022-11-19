@@ -12,7 +12,6 @@ class TestCases {
             args[1]);
 
         Statement stmt = con.createStatement();
-        ResultSet rs0 = stmt.executeQuery("create table reminder(reminder_id number primary key,name varchar2(100),days varchar2(100))");
              ResultSet rs1 = stmt.executeQuery("insert into reminder values(1,'Breakfast','ПН')");
         ResultSet rs = stmt.executeQuery("select *from reminder");
        
