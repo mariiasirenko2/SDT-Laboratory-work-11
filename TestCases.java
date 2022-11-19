@@ -13,10 +13,8 @@ class TestCases {
 
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("create table reminder(reminder_id number primary key,name varchar2(100),days varchar2(100));");
-        ResultSet rs1 =stmt.executeQuery("insert into reminder values(1,'Breakfast','ПН');");
-        ResultSet rs3 =stmt.executeQuery("select *from reminder;");
-        while (rs3.next())
-          System.out.println(rs3.getInt(1) + " " + rs3.getString(2)+" "+ rs3.getString(3));
+       
+        System.out.println(rs.getInt(1));
 
         con.close();
         }catch(Exception e){
