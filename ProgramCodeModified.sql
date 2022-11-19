@@ -12,7 +12,7 @@ CREATE TABLE Users_List IS TABLE OF users;
 /
 
 /* Створення об'єктного типу (класу) Collection */
-CREATE OR REPLACE TABLE Collection AS OBJECT (
+CREATE OR REPLACE TABLE Collection  (
 	collection_id INT, --айді колекції
     references VARCHAR(20), --назва
 	/* Процедура виводу на екран значень атрибутів */
@@ -27,10 +27,10 @@ CREATE OR REPLACE TABLE Project (
 	project_id NUMBER(10), --айді проекту
 	name VARCHAR(100),--назва проекту
 	details VARCHAR(100), --опис проекту
-    keywords VARCHAR(100),--ключові слова проекту
-    --ключовий колів типу #11224h
-    keycolor VARCHAR,
-    collections Collection_List)
+        keywords VARCHAR(100),--ключові слова проекту
+        --ключовий колів типу #11224h
+        keycolor VARCHAR,
+        collections Collection_List)
 	
 
     	CONSTRUCTOR FUNCTION Project(p_pname VARCHAR)
