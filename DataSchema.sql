@@ -1,8 +1,106 @@
-create table users(user_id int primary key, name varchar, surname varchar, email varchar check(email ~* '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$') unique);
-create table reminder(reminder_id int primary key, name varchar, days varchar, time timestamp);
-create table device(device_id int primary key, name varchar);
-create table shedule(user_id int references users(user_id), reminder_id int references reminder(reminder_id), device_id int references device(device_id));
-create table project(project_id int primary key, name varchar, details varchar, keywords varchar, keycolor varchar check(keycolor ~* '#([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3}$'));
-create table collections(collections_id int primary key, name varchar, reference bytea, user_id int references users(user_id), project_id int references project(project_id));
-create table graphic_editor(graphic_editor_id int primary key, name varchar, type varchar);
-create table editor_user(user_id int references users(user_id), graphic_editor_id int references graphic_editor(graphic_editor_id));
+/* видалення таблиць з каскадним видаленням 
+можливих описів цілісності */
+drop table employee CASCADE CONSTRAINTS;
+drop table my_user CASCADE CONSTRAINTS;
+drop table product CASCADE CONSTRAINTS;
+drop table my_order CASCADE CONSTRAINTS;
+drop table order_product CASCADE CONSTRAINTS;
+drop table message CASCADE CONSTRAINTS;
+
+ CREATE SEQUENCE s_user; --
+ CREATE SEQUENCE s_employee; --
+ CREATE SEQUENCE s_message;    --послідовності для заповнення таблиць
+ CREATE SEQUENCE s_order; --
+ CREATE SEQUENCE s_product;   --
+
+CREATE TABLE my_user ( -- опис користувача
+	user_id INT, -- id користувача
+	full_name VARCHAR(100), -- ПІБ
+	phone VARCHAR(20), -- номер телефону
+	pseudonym VARCHAR(100), -- псевдонім
+	avatar bytea -- аватарка
+);
+
+CREATE TABLE employee ( -- опис співробітника
+	employee_id INT, -- id співробітника
+	position VARCHAR(50), -- посада
+	salary NUMBER(7,2), -- з/п
+	date_of_employment DATE, -- дата найму на роботу
+	user_id INT -- id користувача
+);
+
+CREATE TABLE message ( -- опис онлайн-повідомлень
+	msg_id INT, -- id повідомлення
+	text VARCHAR(2000), -- текст повідомлення
+	receiver_id INT, -- id отримувача
+	sender_id INT, -- id відправника
+);
+
+CREATE TABLE my_order ( -- опис онлайн-повідомлень
+	order_id INT, -- id замовлення
+	order_time TIME, -- час замовлення
+	delivery_time TIME, -- час доставки
+	delivery_address VARCHAR(100), -- адреса доставки
+	total_price NUMBER(6,2), -- загальна ціна
+	user_id INT, -- id замовника
+	employee_id INT, -- id працівника, відповідального за це замовлення
+);
+
+CREATE TABLE product ( -- опис онлайн-повідомлень
+	product_id NUMBER(10), -- id продукту
+	name VARCHAR(100), -- назва
+	price NUMBER(6,2), -- ціна
+);
+
+CREATE TABLE order_product (
+			order_id INT REFERENCES my_order(order_id),
+			product_id INT REFERENCES product(product_id),
+			PRIMARY KEY (order_id, product_id)
+);
+
+
+---------- обмеження первинних ключів
+ALTER TABLE my_user ADD CONSTRAINT user_pk
+PRIMARY KEY (user_id);
+ALTER TABLE employee ADD CONSTRAINT employee_pk
+PRIMARY KEY (employee_id);
+ALTER TABLE message ADD CONSTRAINT message_pk
+PRIMARY KEY (msg_id);
+ALTER TABLE my_order ADD CONSTRAINT order_pk
+PRIMARY KEY (id_order);
+ALTER TABLE product ADD CONSTRAINT product_pk
+PRIMARY KEY (id_product);
+	
+---------- обмеження зовнішніх ключів
+
+ALTER TABLE employee ADD CONSTRAINT employee_user_fk
+FOREIGN KEY (user_id)
+REFERENCES user(user_id);
+
+
+ALTER TABLE message ADD CONSTRAINT message_rec_fk
+FOREIGN KEY (receiver_id)
+REFERENCES my_user(user_id);
+ALTER TABLE message ADD CONSTRAINT message_sen_fk
+FOREIGN KEY (sender_id)
+REFERENCES my_user(user_id);
+
+ALTER TABLE my_order ADD CONSTRAINT order_us_fk
+FOREIGN KEY (user_id)
+REFERENCES my_user(user_id);
+ALTER TABLE my_order ADD CONSTRAINT order_emp_fk
+FOREIGN KEY (employee_id)
+REFERENCES employee(employee_id);
+
+	
+-- обмеження вмісту стовпчиків таблиць
+ALTER TABLE my_user ADD CONSTRAINT pseudonym_template
+    CHECK (regexp_like(pseudonym, 
+	           '@[a-z0-9_-]+'));
+
+ALTER TABLE my_user ADD CONSTRAINT user_phone_template
+    CHECK ( regexp_like(phone, 
+	          '^(\([0-9]{3}\))?[0-9]{3}-[0-9]{4}$'));
+			  
+ALTER TABLE employee ADD CONSTRAINT emp_salary_range
+	CHECK (salary between 0 and 1000000);
