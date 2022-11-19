@@ -1,6 +1,6 @@
 /* Методи класу Location */
 -- DROP TYPE Reminder FORCE;
-CREATE OR REPLACE TYPE BODY Reminder AS 
+CREATE OR REPLACE TYPE BODY Reminder AS
 
     /* конструктор екземплярів об'єктів класів.
        Вхідні параметри:
@@ -20,15 +20,15 @@ CREATE OR REPLACE TYPE BODY Reminder AS
         FROM Reminder
         WHERE 
             name = p_rname;
-        SELF.reminder_id := v_reminder_id;
-        SELF.name := p_rname;
+        reminder_id := v_reminder_id;
+        name := p_rname;
         RETURN;
     EXCEPTION WHEN NO_DATA_FOUND THEN
         INSERT INTO Reminder (name)
             VALUES (p_rname)
         RETURNING reminder_id INTO v_reminder_id;
-        SELF.reminder_id := v_reminder_id;
-        SELF.name := p_rname;
+        reminder_id := v_reminder_id;
+        name := p_rname;
         RETURN;
     END Reminder;
 
@@ -38,9 +38,9 @@ CREATE OR REPLACE TYPE BODY Reminder AS
 	BEGIN
         UPDATE Reminder SET name = p_r_name
 		WHERE reminder_id = p_reminder_id;
-		SELF.name := p_r_name;
-        SELF.day := p_r_day;
-        SELF.time := p_r_time;
+		name := p_r_name;
+        day := p_r_day;
+        time := p_r_time;
 	END set_r_name;
 
 	/* Функції отримання значень атрибутів */
@@ -115,7 +115,6 @@ CREATE OR REPLACE TYPE BODY Shedule AS
             END IF;
         END LOOP;
         dbms_output.put_line('}');
-        
     END display;
 END; 
 /
