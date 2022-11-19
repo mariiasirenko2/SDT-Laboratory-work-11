@@ -12,23 +12,32 @@ class TestCases {
             args[0],
             args[1]);
 
-       CallableStatement cstmt1 = con.prepareCall("{? = call check_reminder(?,?)}");
-        cstmt1.registerOutParameter(1,Types.NUMERIC);
-        cstmt1.setString(2,"текст повідомлення");
-        cstmt1.setString(3,"+380625816525");
-        cstmt1.executeUpdate();
-        System.out.print("TC1: send_message('текст повідомлення','+380625816525') очікуваний результат 1, результат:" + cstmt1.getInt(1));
-        if(cstmt1.getInt(1) == 1) System.out.println("Passed");
-        else{System.out.println("Failed");
-          testcaseResult = -1;}
-
-
+       Statement stmt = con.createStatement();
        
+        ResultSet rs3 =stmt.executeQuery("create or replace function check_reminder(reminder_name varchar, reminder_day varchar)\n"
+            + "return number\n"
+            + "is\n"
+            + "    res number(1);\n"
+            + "begin\n"
+            + "    if check_reminder_name(reminder_name) then\n"
+            + "        if check_reminder_day(reminder_day) then\n"
+            + "        begin\n"
+            + "            res:=1;\n"
+            + "        exception when others then\n"
+            + "            res := -3;\n"
+            + "        end;\n"
+            + "    else\n"
+            + "        res :=-2;\n"
+            + "    end if;\n"
+            + "else\n"
+            + "res :=-1;\n"
+            + "end if;\n"
+            + "return res;\n"
+            + "end");
 
-
-        con.close();
+        }catch(Exception e){
+          System.out.println(e);
+        }
       }
-      catch(Exception e){System.out.println(e);}
-      System.exit(testcaseResult);
+
     }
-}
