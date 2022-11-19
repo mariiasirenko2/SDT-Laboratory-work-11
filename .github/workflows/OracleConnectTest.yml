@@ -17,6 +17,7 @@ jobs:
           java OracleCon.java
         
       - name: Execute
+        run: |
           cd $GITHUB_WORKSPACE
           export CLASSPATH="./ojdbc8.jar:./"
           echo "$env:LOGIN"
