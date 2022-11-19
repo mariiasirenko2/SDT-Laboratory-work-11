@@ -19,7 +19,7 @@ CREATE OR REPLACE TYPE BODY Reminder AS
 	    RETURN NUMBER 
 	IS
     BEGIN
-       RETURN SELF.reminder_id;
+       RETURN reminder_id;
     END get_reminder_id;
 
 	/* get_r_name */
@@ -27,7 +27,7 @@ CREATE OR REPLACE TYPE BODY Reminder AS
 	    RETURN VARCHAR 
 	IS
     BEGIN
-       RETURN SELF.name;
+       RETURN name;
     END get_r_name;	
 
     /* get_r_day */
@@ -35,7 +35,7 @@ CREATE OR REPLACE TYPE BODY Reminder AS
 	    RETURN VARCHAR 
 	IS
     BEGIN
-       RETURN SELF.day;
+       RETURN day;
     END get_r_day;	
 
 
@@ -44,7 +44,7 @@ CREATE OR REPLACE TYPE BODY Reminder AS
 	    RETURN TIMESTAMP 
 	IS
     BEGIN
-       RETURN SELF.time;
+       RETURN time;
     END get_r_time;	
 
 END; 
