@@ -17,7 +17,7 @@ CREATE OR REPLACE TYPE BODY Reminder AS
         v_reminder_id Reminder.reminder_id%TYPE;
     BEGIN
         SELECT reminder_id INTO v_reminder_id
-        FROM Reminder
+        FROM Reminder From create
         WHERE 
             name = p_rname;
         SELF.reminder_id := v_reminder_id;
