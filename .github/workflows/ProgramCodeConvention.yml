@@ -13,6 +13,6 @@ jobs:
       - name: Lint Program Code
         uses: github/super-linter@v4
         env:
-          VALIDATE_ORACLE: true
-          FILTER_REGEX_INCLUDE: ./*.sql
+          VALIDATE_SQL: true
+          FILTER_REGEX_INCLUDE: ./*.sql --dialect oracle
           GITHUB_TOKEN: ${{secrets.TOKEN}}
