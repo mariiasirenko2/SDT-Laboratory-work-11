@@ -3,7 +3,7 @@ import oracle.jdbc.driver.*;
 
 class TestCasesModified {
 
-    public static void main(final String[] args) {
+     public static void main(final String[] args) {
         int testcaseResult = 0;
         try{
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -12,14 +12,11 @@ class TestCasesModified {
             args[0],
             args[1]);
 
-        
+              Statement stmt = con.createStatement();
 
-        con.close();
-      }
-      catch(Exception e){
+
+        }catch(Exception e){
           System.out.println(e);
+        }
       }
-        
-      System.exit(-1);
-    }
 }
