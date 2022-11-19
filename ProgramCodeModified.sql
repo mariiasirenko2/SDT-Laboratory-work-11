@@ -23,7 +23,7 @@ CREATE OR REPLACE TABLE Collection AS OBJECT (
 CREATE TABLE Collection_List IS TABLE OF Collection;
 
 /* Створення об'єктного типу (класу) Project */
-CREATE OR REPLACE TABLE Project AS OBJECT (
+CREATE OR REPLACE TABLE Project (
 	project_id NUMBER(10), --айді проекту
 	name VARCHAR(100),--назва проекту
 	details VARCHAR(100), --опис проекту
