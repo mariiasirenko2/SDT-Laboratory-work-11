@@ -12,7 +12,7 @@ CREATE TABLE Users_List IS TABLE OF users;
 /
 
 /* Створення об'єктного типу (класу) Reminder */
-CREATE OR REPLACE TABLE Reminder AS OBJECT (
+CREATE OR REPLACE TABLE Reminder (
 	reminder_id INT, --айді нагадування
     name VARCHAR(20), --назва
 	days VARCHAR(20), --дні коли робити нагадування
@@ -22,28 +22,13 @@ CREATE OR REPLACE TABLE Reminder AS OBJECT (
 ); 
 /
 /* Створення об'єктного типу (класу) Device */
-CREATE OR REPLACE TABLE Device AS OBJECT (
+CREATE OR REPLACE TABLE Device  (
 	device_id INT, --айді девайсу
     name VARCHAR(20), --назва
 	/* Процедура виводу на екран значень атрибутів */
     	MEMBER PROCEDURE display
 );
 
-/
-/* Створення типу для зберігання списку девайсів - "Колекція екземплярів об`єктів класу Device */
-CREATE TYPE Device_List IS TABLE OF Device;
-/* Створення типу для зберігання списку нагадувань - "Колекція екземплярів об`єктів класу Reminder */
-CREATE TYPE Reminder_List IS TABLE OF Reminder;
-
-/* Створення об'єктного типу (класу) Shedule */
-CREATE OR REPLACE TABLE Shedule AS OBJECT (
-	user  Users, -- власник графіку
-	reminder Reminder_List, -- список нагадувань у графіку
-	device Device_List, -- список девайсів, що нагадують про графік
-	/* Процедура виводу на екран значень атрибутів */
-    	MEMBER PROCEDURE display
-); 
-/
 
 /* Створення об'єктного типу (класу) Collection */
 CREATE OR REPLACE TABLE Collection AS OBJECT (
@@ -54,7 +39,7 @@ CREATE OR REPLACE TABLE Collection AS OBJECT (
 );
 
 /* Створення типу для зберігання списку колекцій - "Колекція екземплярів об`єктів класу Collection */
-CREATE TYPE Collection_List IS TABLE OF Collection;
+CREATE TABLE Collection_List IS TABLE OF Collection;
 
 /* Створення об'єктного типу (класу) Project */
 CREATE OR REPLACE TABLE Project AS OBJECT (
