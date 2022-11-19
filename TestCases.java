@@ -29,7 +29,7 @@ class TestCases {
         cstmt1.setString(2,"akdcsdkvfdjsvnjkfkfbjfv");
         cstmt1.setString(3,"ПН");
         cstmt1.executeUpdate();
-        System.out.print("TC1: check_reminder('akdcsdkvfdjsvnjkfkfbjfv','ПН') expect -1 - result:" + cstmt1.getInt(1));
+        System.out.print("TC2: check_reminder('akdcsdkvfdjsvnjkfkfbjfv','ПН') expect -1 - result:" + cstmt1.getInt(1));
         if(cstmt1.getInt(1) == -1) 
             System.out.println("Passed");
         else{
@@ -40,7 +40,7 @@ class TestCases {
         cstmt1.setString(2,"12 Breakfast");
         cstmt1.setString(3,"ПН");
         cstmt1.executeUpdate();
-        System.out.print("TC1: check_reminder('12 Breakfast','ПН') expect -1 - result:" + cstmt1.getInt(1));
+        System.out.print("TC3: check_reminder('12 Breakfast','ПН') expect -1 - result:" + cstmt1.getInt(1));
         if(cstmt1.getInt(1) == -1) 
             System.out.println("Passed");
         else{
@@ -50,7 +50,7 @@ class TestCases {
         cstmt1.setString(2,"Breakfast");
         cstmt1.setString(3,"monday");
         cstmt1.executeUpdate();
-        System.out.print("TC1: check_reminder('Breakfast','monday') expect -2 - result:" + cstmt1.getInt(1));
+        System.out.print("TC4: check_reminder('Breakfast','monday') expect -2 - result:" + cstmt1.getInt(1));
         if(cstmt1.getInt(1) == -2) 
             System.out.println("Passed");
         else{
