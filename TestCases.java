@@ -12,9 +12,10 @@ class TestCases {
             args[1]);
 
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("create table reminder(reminder_id number primary key,name varchar2(100),days varchar2(100));");
+        ResultSet rs = stmt.executeQuery("select *from reminder;");
        
-        System.out.println(rs.getInt(1));
+        while(rs.next())
+            System.out.println(rs.getInt(1));
 
         con.close();
         }catch(Exception e){
