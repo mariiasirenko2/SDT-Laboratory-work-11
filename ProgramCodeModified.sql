@@ -1,19 +1,18 @@
 /* Створення об'єктного типу (класу) users */
-DROP TYPE Users FORCE;
-CREATE OR REPLACE TYPE Users AS OBJECT (
+CREATE OR REPLACE TABLE Users(
 	user_id INT, -- id користувача
 	name VARCHAR, --ім'я
 	surname VARCHAR, --прізвище
-	email VARCHAR 
+	email VARCHAR
     	MEMBER PROCEDURE display
-); 
+);
 
 /* Створення типу для зберігання списку користувачів - "Колекція екземплярів об`єктів класу Users */
-CREATE TYPE Users_List IS TABLE OF users;
+CREATE TABLE Users_List IS TABLE OF users;
 /
 
 /* Створення об'єктного типу (класу) Reminder */
-CREATE OR REPLACE TYPE Reminder AS OBJECT (
+CREATE OR REPLACE TABLE Reminder AS OBJECT (
 	reminder_id INT, --айді нагадування
     name VARCHAR(20), --назва
 	days VARCHAR(20), --дні коли робити нагадування
@@ -23,7 +22,7 @@ CREATE OR REPLACE TYPE Reminder AS OBJECT (
 ); 
 /
 /* Створення об'єктного типу (класу) Device */
-CREATE OR REPLACE TYPE Device AS OBJECT (
+CREATE OR REPLACE TABLE Device AS OBJECT (
 	device_id INT, --айді девайсу
     name VARCHAR(20), --назва
 	/* Процедура виводу на екран значень атрибутів */
@@ -37,7 +36,7 @@ CREATE TYPE Device_List IS TABLE OF Device;
 CREATE TYPE Reminder_List IS TABLE OF Reminder;
 
 /* Створення об'єктного типу (класу) Shedule */
-CREATE OR REPLACE TYPE Shedule AS OBJECT (
+CREATE OR REPLACE TABLE Shedule AS OBJECT (
 	user  Users, -- власник графіку
 	reminder Reminder_List, -- список нагадувань у графіку
 	device Device_List, -- список девайсів, що нагадують про графік
@@ -47,7 +46,7 @@ CREATE OR REPLACE TYPE Shedule AS OBJECT (
 /
 
 /* Створення об'єктного типу (класу) Collection */
-CREATE OR REPLACE TYPE Collection AS OBJECT (
+CREATE OR REPLACE TABLE Collection AS OBJECT (
 	collection_id INT, --айді колекції
     references VARCHAR(20), --назва
 	/* Процедура виводу на екран значень атрибутів */
@@ -58,7 +57,7 @@ CREATE OR REPLACE TYPE Collection AS OBJECT (
 CREATE TYPE Collection_List IS TABLE OF Collection;
 
 /* Створення об'єктного типу (класу) Project */
-CREATE OR REPLACE TYPE Project AS OBJECT (
+CREATE OR REPLACE TABLE Project AS OBJECT (
 	project_id NUMBER(10), --айді проекту
 	name VARCHAR(100),--назва проекту
 	details VARCHAR(100), --опис проекту
@@ -90,6 +89,4 @@ CREATE OR REPLACE TYPE Project AS OBJECT (
 	/* Процедура виводу на екран значень атрибутів */
     	MEMBER PROCEDURE display
 ); 
-/
-/* Створення типу для зберігання списку проектів - "Колекція екземплярів об`єктів класу Project */
-CREATE TYPE Projects_List IS TABLE OF Project;
+
