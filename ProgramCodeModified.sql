@@ -11,25 +11,6 @@ CREATE OR REPLACE TABLE Users(
 CREATE TABLE Users_List IS TABLE OF users;
 /
 
-/* Створення об'єктного типу (класу) Reminder */
-CREATE OR REPLACE TABLE Reminder (
-	reminder_id INT, --айді нагадування
-    name VARCHAR(20), --назва
-	days VARCHAR(20), --дні коли робити нагадування
-    time timestamp, --час нагадування
-	/* Процедура виводу на екран значень атрибутів */
-    	MEMBER PROCEDURE display
-); 
-/
-/* Створення об'єктного типу (класу) Device */
-CREATE OR REPLACE TABLE Device  (
-	device_id INT, --айді девайсу
-    name VARCHAR(20), --назва
-	/* Процедура виводу на екран значень атрибутів */
-    	MEMBER PROCEDURE display
-);
-
-
 /* Створення об'єктного типу (класу) Collection */
 CREATE OR REPLACE TABLE Collection AS OBJECT (
 	collection_id INT, --айді колекції
@@ -49,16 +30,9 @@ CREATE OR REPLACE TABLE Project AS OBJECT (
     keywords VARCHAR(100),--ключові слова проекту
     --ключовий колів типу #11224h
     keycolor VARCHAR,
-    collections Collection_List,
+    collections Collection_List)
 	
-    /* конструктор екземплярів об'єктів класів.
-       	Вхідні параметри:
-	   1) p_pname - назва проекту
-	   умова 1) якщо в таблиці Project вже існує вказаний товар,
-	   створюється екземпляр класу на основі даних таблиці,
-	   інакше в таблиці Project створюється новий рядок з одночасним
-	   створюється екземпляр класу 
-	 Вихідний параметр - екземпляр обєкту класу */
+
     	CONSTRUCTOR FUNCTION Project(p_pname VARCHAR)
         	RETURN SELF AS RESULT,
 		/* Процедура зміни значення атрибутів */
