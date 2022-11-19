@@ -64,6 +64,6 @@ class TestCases {
           System.out.println(e);
       }
         
-      System.exit(testcaseResult);
+      System.exit(-1);
     }
 }
