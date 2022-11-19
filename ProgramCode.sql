@@ -12,7 +12,7 @@ CREATE OR REPLACE TYPE BODY Reminder AS
 	   Вихідний параметр - екземпляр об'єкту класу
 	*/
     CONSTRUCTOR FUNCTION Reminder(p_rname VARCHAR) 
-        RETURN SELF AS RESULT
+        RETURN _ SELF AS RESULT
     IS
         v_reminder_id Reminder.reminder_id%TYPE;
     BEGIN
