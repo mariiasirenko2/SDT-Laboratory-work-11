@@ -12,16 +12,6 @@ CREATE OR REPLACE TYPE BODY Reminder AS
 	   Вихідний параметр - екземпляр об'єкту класу
 	*/
 
-	/* Процедура зміни значення атрибутів */
-	MEMBER PROCEDURE set_r_name(p_reminder_id NUMBER, p_r_name VARCHAR,p_r_day VARCHAR,p_r_time TIMESTAMP )
-	IS
-	BEGIN
-        UPDATE Reminder SET name = p_r_name
-		WHERE reminder_id = p_reminder_id;
-		name := p_r_name;
-        day := p_r_day;
-        time := p_r_time;
-	END set_r_name;
 
 	/* Функції отримання значень атрибутів */
 	/* get_reminder_id */
