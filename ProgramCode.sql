@@ -12,12 +12,12 @@ CREATE OR REPLACE TYPE BODY Reminder AS
 	   Вихідний параметр - екземпляр об'єкту класу
 	*/
     CONSTRUCTOR FUNCTION Reminder(p_rname VARCHAR) 
-        RETURN _ SELF AS RESULT
+        RETURN SELF AS RESULT
     IS
         v_reminder_id Reminder.reminder_id%TYPE;
     BEGIN
         SELECT reminder_id INTO v_reminder_id
-        FROM Reminder From create
+        FROM Reminder 
         WHERE 
             name = p_rname;
         SELF.reminder_id := v_reminder_id;
@@ -95,7 +95,7 @@ CREATE OR REPLACE TYPE BODY Shedule AS
     значень атрибутів екземпляру об'єкту класу */
     MEMBER PROCEDURE display IS 
     BEGIN 
-        dbms_output.put_line('Owner: ' || Users.fullname); 
+        RAISE NOTICE('Owner: ' || Users.fullname), NEW.col;
         dbms_output.put('Reminders: {'); 
         FOR i IN 1..reminders.COUNT LOOP
 			dbms_output.put(Reminder(i).name);
@@ -118,4 +118,4 @@ CREATE OR REPLACE TYPE BODY Shedule AS
         
     END display;
 END; 
-/
+
