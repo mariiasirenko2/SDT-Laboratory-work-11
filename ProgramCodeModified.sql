@@ -11,26 +11,6 @@ CREATE OR REPLACE TYPE BODY Reminder AS
 	   створюється екземпляр класу 
 	   Вихідний параметр - екземпляр об'єкту класу
 	*/
-    CONSTRUCTOR FUNCTION Reminder(p_rname VARCHAR) 
-        RETURN SELF AS RESULT
-    IS
-        v_reminder_id Reminder.reminder_id%TYPE;
-    BEGIN
-        SELECT reminder_id INTO v_reminder_id
-        FROM Reminder
-        WHERE 
-            name = p_rname;
-        reminder_id := v_reminder_id;
-        name := p_rname;
-        RETURN;
-    EXCEPTION WHEN NO_DATA_FOUND THEN
-        INSERT INTO Reminder (name)
-            VALUES (p_rname)
-        RETURNING reminder_id INTO v_reminder_id;
-        reminder_id := v_reminder_id;
-        name := p_rname;
-        RETURN;
-    END Reminder;
 
 	/* Процедура зміни значення атрибутів */
 	MEMBER PROCEDURE set_r_name(p_reminder_id NUMBER, p_r_name VARCHAR,p_r_day VARCHAR,p_r_time TIMESTAMP )
