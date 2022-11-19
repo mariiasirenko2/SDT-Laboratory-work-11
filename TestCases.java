@@ -11,8 +11,7 @@ class TestCases {
                     "jdbc:oracle:thin:@91.219.60.189:1521/XEPDB1",
                     args[0],
                     args[1]);
-            System.out.println(args[0]);
-            System.out.println(args[1]);
+          
 
             CallableStatement cstmt1 = con.prepareCall("{? = call send_message(?,?)}");
             cstmt1.registerOutParameter(1,Types.NUMERIC);
