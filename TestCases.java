@@ -12,58 +12,34 @@ class TestCases {
             args[0],
             args[1]);
 
-        CallableStatement cstmt1 = con.prepareCall("{? = call check_reminder(?,?)}");
-        cstmt1.registerOutParameter(1,Types.NUMERIC);
-        cstmt1.setString(2,"Breakfast");
-        cstmt1.setString(3,"ПН");
-        cstmt1.executeUpdate();
-        System.out.print("TC1: check_reminder('Breakfast','ПН') expect 1 - result:" + cstmt1.getInt(1));
-        if(cstmt1.getInt(1) == 1) 
-            System.out.println("Passed");
-        else{
-            System.out.println("Failed");
-            testcaseResult = -1;
-        }
+              Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("create table reminder(reminder_id int primary key, name varchar, days varchar);");
+        ResultSet rs1 =stmt.executeQuery("insert into reminder values(1,'Breakfast','ПН');");
+        ResultSet rs3 =stmt.executeQuery("create or replace function check_reminder(reminder_name varchar, reminder_day varchar)\n"
+            + "return number\n"
+            + "is\n"
+            + "    res number(1);\n"
+            + "begin\n"
+            + "    if check_reminder_name(reminder_name) then\n"
+            + "        if check_reminder_day(reminder_day) then\n"
+            + "        begin\n"
+            + "            res:=1;\n"
+            + "        exception when others then\n"
+            + "            res := -3;\n"
+            + "        end;\n"
+            + "    else\n"
+            + "        res :=-2;\n"
+            + "    end if;\n"
+            + "else\n"
+            + "res :=-1;\n"
+            + "end if;\n"
+            + "return res;\n"
+            + "end;");
 
-
-        cstmt1.setString(2,"akdcsdkvfdjsvnjkfkfbjfv");
-        cstmt1.setString(3,"ПН");
-        cstmt1.executeUpdate();
-        System.out.print("TC2: check_reminder('akdcsdkvfdjsvnjkfkfbjfv','ПН') expect -1 - result:" + cstmt1.getInt(1));
-        if(cstmt1.getInt(1) == -1) 
-            System.out.println("Passed");
-        else{
-            System.out.println("Failed");
-            testcaseResult = -1;
-        }
-
-        cstmt1.setString(2,"12 Breakfast");
-        cstmt1.setString(3,"ПН");
-        cstmt1.executeUpdate();
-        System.out.print("TC3: check_reminder('12 Breakfast','ПН') expect -1 - result:" + cstmt1.getInt(1));
-        if(cstmt1.getInt(1) == -1) 
-            System.out.println("Passed");
-        else{
-            System.out.println("Failed");
-            testcaseResult = -1;}
-
-        cstmt1.setString(2,"Breakfast");
-        cstmt1.setString(3,"monday");
-        cstmt1.executeUpdate();
-        System.out.print("TC4: check_reminder('Breakfast','monday') expect -2 - result:" + cstmt1.getInt(1));
-        if(cstmt1.getInt(1) == -2) 
-            System.out.println("Passed");
-        else{
-            System.out.println("Failed");
-            testcaseResult = -1;
-        }
-
-        con.close();
-      }
-      catch(Exception e){
+        }catch(Exception e){
           System.out.println(e);
+        }
       }
-        
-      System.exit(testcaseResult);
+
     }
-}
+
