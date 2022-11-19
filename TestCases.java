@@ -13,11 +13,25 @@ class TestCases {
             args[1]);
 
          Statement stmt = con.createStatement();
-       ResultSet rs3 =stmt.executeQuery("create or replace function check_reminder_day(reminder_day varchar)\n"
-            + "return boolean\n"
+       ResultSet rs3 =stmt.executeQuery("create or replace function check_reminder(reminder_name varchar, reminder_day varchar)\n"
+            + "return number\n"
             + "is\n"
+            + "    res number(1);\n"
             + "begin\n"
-            + "return  regexp_like(reminder_day, '^(\\s*ПН|ВТ|СР)');\n"
+            + "    if check_reminder_name(reminder_name) then\n"
+            + "        if check_reminder_day(reminder_day) then\n"
+            + "        begin\n"
+            + "            res:=1;\n"
+            + "        exception when others then\n"
+            + "            res := -3;\n"
+            + "        end;\n"
+            + "    else\n"
+            + "        res :=-2;\n"
+            + "    end if;\n"
+            + "else\n"
+            + "res :=-1;\n"
+            + "end if;\n"
+            + "return res;\n"
             + "end");
         con.close();
         }catch(Exception e){
