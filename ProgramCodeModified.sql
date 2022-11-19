@@ -47,44 +47,7 @@ CREATE OR REPLACE TYPE BODY Reminder AS
        RETURN SELF.time;
     END get_r_time;	
 
-    /* Процедура виводу на екран значень атрибутів */
-    MEMBER PROCEDURE display 
-    IS
-    BEGIN 
-        dbms_output.put_line('reminder_id: ' || reminder_id);
-        dbms_output.put_line('name: ' || name);
-        dbms_output.put_line('day: ' ||  day);
-        dbms_output.put_line('time: ' || time);
-    END display;
 END; 
 /
 
-/* Методи класу Shedule */
-CREATE OR REPLACE TYPE BODY Shedule AS 
-    /* Метод-процедура display виводу на екран 
-    значень атрибутів екземпляру об'єкту класу */
-    MEMBER PROCEDURE display IS 
-    BEGIN 
-        dbms_output.put_line('Owner: ' || Users.fullname); 
-        dbms_output.put('Reminders: {'); 
-        FOR i IN 1..reminders.COUNT LOOP
-			dbms_output.put(Reminder(i).name);
-            dbms_output.put_line(Reminder(i).day);
-            dbms_output.put_line(Reminder(i).time);
-            IF i < Reminder.COUNT THEN 
-                dbms_output.put(',');
-            END IF;
-        END LOOP;
-        dbms_output.put_line('}');	
 
-        dbms_output.put('Devices: {'); 
-        FOR i IN 1..devices.COUNT LOOP
-			dbms_output.put(Device(i).name);
-            IF i < Device.COUNT THEN 
-                dbms_output.put(',');
-            END IF;
-        END LOOP;
-        dbms_output.put_line('}');
-    END display;
-END; 
-/
