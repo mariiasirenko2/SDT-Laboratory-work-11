@@ -13,28 +13,7 @@ class TestCases {
             args[1]);
 
               Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("create table reminder(reminder_id int primary key, name varchar, days varchar);");
-        ResultSet rs1 =stmt.executeQuery("insert into reminder values(1,'Breakfast','ПН');");
-        ResultSet rs3 =stmt.executeQuery("create or replace function check_reminder(reminder_name varchar, reminder_day varchar)\n"
-            + "return number\n"
-            + "is\n"
-            + "    res number(1);\n"
-            + "begin\n"
-            + "    if check_reminder_name(reminder_name) then\n"
-            + "        if check_reminder_day(reminder_day) then\n"
-            + "        begin\n"
-            + "            res:=1;\n"
-            + "        exception when others then\n"
-            + "            res := -3;\n"
-            + "        end;\n"
-            + "    else\n"
-            + "        res :=-2;\n"
-            + "    end if;\n"
-            + "else\n"
-            + "res :=-1;\n"
-            + "end if;\n"
-            + "return res;\n"
-            + "end");
+
 
         }catch(Exception e){
           System.out.println(e);
